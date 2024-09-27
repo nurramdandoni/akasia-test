@@ -1,23 +1,18 @@
-const { Activity } = require("../models");
-async function createActivity(subject, description) {
-  try {
-    const newActivity = await Activity.create({
-      subject: subject,
-      description: description,
-    });
-    console.log("Activity created: ", newActivity.activitiesNo);
-    return newActivity;
-  } catch (error) {
-    console.error("Error creating activity: ", error);
-  }
-}
-exports.createActivity = async (req, res) => {
+const { where } = require("sequelize");
+const { User } = require("../models");
+
+exports.cekUser = async (req, res) => {
   const { body } = req;
   console.log(body);
-  const newActivity = await createActivity(body.subject, body.description);
-  if (newActivity) {
-    res.status(200).json({ message: "Activity created successfully." });
+  const cekUser = await User.findOne({
+    where: {
+      userId: body.userId,
+      password: body.password,
+    },
+  });
+  if (cekUser != null) {
+    res.status(200).json({ message: "Login successfully.", data: cekUser });
   } else {
-    res.status(200).json({ message: "Problem to created Activity" });
+    res.status(200).json({ message: "Problem to Login" });
   }
 };
