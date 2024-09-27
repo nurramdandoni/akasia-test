@@ -1,0 +1,17 @@
+
+# Use the official Node.js image
+FROM node:18
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Copy app source code
+COPY ./backend/ ./
+
+RUN npm install
+
+# Expose port 8081
+EXPOSE 8081
+
+# Serve the app
+CMD [ "npm", "run", "start" ]
