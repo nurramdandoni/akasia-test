@@ -11,6 +11,7 @@ COPY ./backend/ ./
 RUN npm install
 
 RUN npx sequelize-cli db:migrate
+RUN npx sequelize-cli db:seed:all
 
 # Expose port 8081
 EXPOSE 8081
