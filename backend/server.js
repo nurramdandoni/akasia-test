@@ -1,9 +1,11 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 
 const port = process.env.APP_PORT;
 
 const app = express();
+app.use(cors({origin:"http://localhost:8080"}));
 app.use(express.json());
 // unutk cek koneksi database saja
 // const { sequelizeErekrut } = require("./db");
