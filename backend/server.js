@@ -15,10 +15,8 @@ app.get("/", (req, res) => {
   res.status(200).json({ status: "Sukses", message: "API Ready" });
 });
 app.post("/login", user.cekUser);
-app.get("/", (req, res) => {
-  res.status(200).json({ status: "Sukses", message: "API Ready" });
-});
-app.post("/create", activity.createActivity);
+app.post("/activity", activity.createActivity);
+app.put("/activity", activity.updateActivity);
 
 const server = app.listen(port, "0.0.0.0", () => {
   console.log("server running");
