@@ -16,9 +16,9 @@ exports.createActivity = async (req, res) => {
   console.log(body);
   const newActivity = await createActivity(body.subject, body.description);
   if (newActivity) {
-    res.status(200).json({ message: "Activity created successfully." });
+    res.status(200).json({status:"success", message: "Activity created successfully." });
   } else {
-    res.status(200).json({ message: "Problem to created Activity" });
+    res.status(200).json({status:"failed", message: "Problem to created Activity" });
   }
 };
 
@@ -33,15 +33,15 @@ exports.updateActivity = async (req, res) => {
       if (updated) {
         res
           .status(200)
-          .json({ message: "Update successfully.", data: dataActivity });
+          .json({status:"success", message: "Update successfully.", data: dataActivity });
       } else {
-        res.status(200).json({ message: "Problem to Update" });
+        res.status(200).json({status:"failed", message: "Problem to Update" });
       }
     } else {
-      res.status(200).json({ message: "Only can Modify Status unmarked" });
+      res.status(200).json({status:"failed", message: "Only can Modify Status unmarked" });
     }
   } else {
-    res.status(200).json({ message: "data not found" });
+    res.status(200).json({status:"failed", message: "data not found" });
   }
 };
 
@@ -55,14 +55,14 @@ exports.deleteActivity = async (req, res) => {
       if (updated) {
         res
           .status(200)
-          .json({ message: "Delete successfully.", data: dataActivity });
+          .json({status:"success", message: "Delete successfully.", data: dataActivity });
       } else {
-        res.status(200).json({ message: "Problem to Delete" });
+        res.status(200).json({status:"failed", message: "Problem to Delete" });
       }
     } else {
-      res.status(200).json({ message: "Only can Delete Status unmarked" });
+      res.status(200).json({status:"failed", message: "Only can Delete Status unmarked" });
     }
   } else {
-    res.status(200).json({ message: "data not found" });
+    res.status(200).json({status:"failed", message: "data not found" });
   }
 };

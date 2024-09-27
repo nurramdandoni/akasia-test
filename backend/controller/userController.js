@@ -12,11 +12,11 @@ exports.cekUser = async (req, res) => {
       },
     });
     if (cekUser != null) {
-      res.status(200).json({ message: "Login successfully.", data: cekUser });
+      res.status(200).json({status:"success", message: "Login successfully.", data: cekUser });
     } else {
-      res.status(200).json({ message: "Problem to Login" });
+      res.status(200).json({status:"failed", message: "Problem to Login" });
     }
   } else {
-    res.status(400).json({ message: "Bad Request" });
+    res.status(400).json({status:"failed", message: "Bad Request" });
   }
 };
