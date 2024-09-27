@@ -24,16 +24,43 @@ exports.createActivity = async (req, res) => {
 
 exports.updateActivity = async (req, res) => {
   const { body } = req;
-  console.log(body);
+  // console.log(body);
   const dataActivity = await Activity.findByPk(body.id);
   if (dataActivity != null) {
-    const updated = await dataActivity.update(body.data);
-    if (updated) {
-      res
-        .status(200)
-        .json({ message: "Update successfully.", data: dataActivity });
+    console.log(dataActivity);
+    if (dataActivity.status == "Unmarked") {
+      const updated = await dataActivity.update(body.data);
+      if (updated) {
+        res
+          .status(200)
+          .json({ message: "Update successfully.", data: dataActivity });
+      } else {
+        res.status(200).json({ message: "Problem to Update" });
+      }
     } else {
-      res.status(200).json({ message: "Problem to Update" });
+      res.status(200).json({ message: "Only can Modify Status unmarked" });
+    }
+  } else {
+    res.status(200).json({ message: "data not found" });
+  }
+};
+
+exports.deleteActivity = async (req, res) => {
+  const { body } = req;
+  const dataActivity = await Activity.findByPk(body.id);
+  if (dataActivity != null) {
+    console.log(dataActivity);
+    if (dataActivity.status == "Unmarked") {
+      const updated = await dataActivity.destroy();
+      if (updated) {
+        res
+          .status(200)
+          .json({ message: "Delete successfully.", data: dataActivity });
+      } else {
+        res.status(200).json({ message: "Problem to Delete" });
+      }
+    } else {
+      res.status(200).json({ message: "Only can Delete Status unmarked" });
     }
   } else {
     res.status(200).json({ message: "data not found" });

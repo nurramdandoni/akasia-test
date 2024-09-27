@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 app.post("/login", user.cekUser);
 app.post("/activity", activity.createActivity);
 app.put("/activity", activity.updateActivity);
+app.delete("/activity", activity.deleteActivity);
 
 const server = app.listen(port, "0.0.0.0", () => {
   console.log("server running");
