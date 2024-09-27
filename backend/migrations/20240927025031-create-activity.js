@@ -10,7 +10,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       activitiesNo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true,
+        unique:true
       },
       subject: {
         type: Sequelize.STRING
